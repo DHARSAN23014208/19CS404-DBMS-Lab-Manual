@@ -102,190 +102,150 @@ CREATE TABLE Table_Name (
   col_name3 data_type DEFAULT 'default_value'
 );
 ```
+### Submission:
+DHARSANKUMAR R 212223240028
 
 **Question 1**
-Write a SQL query to modify the Student_details table by adding a new column Email of type VARCHAR(50) and updating the column MARKS to have a default value of 0.
-```
-alter table Student_details
-add column Email varchar(50);
-alter table Student_details
-add column MARKS INT default 0;
+![Q1](https://github.com/user-attachments/assets/e11a7152-453e-427c-ace6-8d9f846540b2)
 
+```sql
+CREATE TABLE Employees(
+EmployeeID PRIMARY KEY,
+FirstName NOT NULL,
+LastName NOT NULL,
+Email UNIQUE,
+Salary DECIMAL CHECK(Salary > 0),
+DepartmentID INTEGER,
+FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
+);
 ```
 
 **Output:**
-
-![image](https://github.com/user-attachments/assets/c240767d-9a76-4fc5-9680-33e7b396caab)
-
+![A1](https://github.com/user-attachments/assets/86235bca-2ddc-4f2d-a158-2b89bad9b01d)
 
 **Question 2**
+![Q2](https://github.com/user-attachments/assets/3c1a3134-7b62-4044-98fe-b6d7444c4d0d)
 
-Create a table named Attendance with the following constraints:
-AttendanceID as INTEGER should be the primary key.
-EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
-AttendanceDate as DATE.
-Status as TEXT should be one of 'Present', 'Absent', 'Leave'.
-```
-create table Attendance(AttendanceID INTEGER PRIMARY KEY,
-EmployeeID INTEGER,
-AttendanceDate DATE,
-Status TEXT check(status in('Present', 'Absent', 'Leave')),
-foreign key (EmployeeID) references Employees(EmployeeID)
-);
+```sql
+ALTER TABLE Student_details
+ADD Date_of_birth Date;
 ```
 
 **Output:**
-
-![image](https://github.com/user-attachments/assets/b67fd78a-ecad-4b0a-aa83-858d7d7627a3)
+![A2](https://github.com/user-attachments/assets/deaa9450-4ab5-46e8-b07f-b1f423fc10b3)
 
 **Question 3**
-In the Cusomers table, insert a record where some fields are NULL, another record where all fields are filled without any NULL values, and a third record where some fields are filled, and others are left as NULL.
+![Q3](https://github.com/user-attachments/assets/94141be7-acae-43b7-bf7f-708012bdb1f8)
 
-CustomerID  Name          Address      City        ZipCode
-----------  ------------  ----------   ----------  ----------
-306         Diana Prince  Themyscira
-307         Bruce Wayne   Wayne Manor  Gotham      10007
-308         Peter Parker  Queens                   11375
- 
-```
-insert into Customers(CustomerID,Name,Address,City,ZipCode)values(306,"Diana Prince","Themyscira",NULL,NULL);
-insert into Customers(CustomerID,Name,Address,City,ZipCode)values(307,"Bruce Wayne","Wayne Manor","Gotham",10007);
-insert into Customers(CustomerID,Name,Address,City,ZipCode)values(308,"Peter Parker","Queens",NULL,11375);
+```sql
+INSERT INTO Products(ProductID, Name, Category, Price, Stock)
+VALUES (106, "Fitness Tracker", "Wearables", NULL, NULL);
+
+INSERT INTO Products(ProductID, Name, Category, Price, Stock)
+VALUES (107, "Laptop", "Electronics", 999.99, 50);
+
+INSERT INTO Products(ProductID, Name, Category, Price, Stock)
+VALUES (108, "Wireless Earbuds", "Accessories", NULL, 100);
 ```
 
 **Output:**
-
-![image](https://github.com/user-attachments/assets/9d91b677-d3b2-4962-ac5b-3c013bc22611)
+![A3](https://github.com/user-attachments/assets/11c330f1-889b-436e-a09d-c08f0e327371)
 
 **Question 4**
-Create a new table named contacts with the following specifications:
-contact_id as INTEGER and primary key.
-first_name as TEXT and not NULL.
-last_name as TEXT and not NULL.
-email as TEXT.
-phone as TEXT and not NULL with a check constraint to ensure the length of phone is at least 10 characters.
-```
-create table contacts(contact_id INTEGER primary key,
-first_name TEXT not NULL,
-last_name TEXT not NULL,
-email TEXT,
-phone TEXT not NULL check(length(phone)>=10)
-);
+![Q4](https://github.com/user-attachments/assets/3f078f30-ea5b-4021-8733-b6417a2cceee)
+
+```sql
+INSERT INTO Employee(EmployeeID, Name, Department, Salary)
+SELECT EmployeeID, Name, Department, Salary FROM Former_employees;
 ```
 
 **Output:**
-
-![image](https://github.com/user-attachments/assets/d7b01c56-81b2-48e0-9b0c-5661598b601b)
+![A4](https://github.com/user-attachments/assets/7cd124b6-20c9-42d3-bdb1-48bb41f38dce)
 
 **Question 5**
-Write an SQL query to add two new columns, department_id and manager_id, to the table employee with datatype of INTEGER. The manager_id column should have a default value of NULL.
+![Q5](https://github.com/user-attachments/assets/4c3e15c9-f268-477b-91d8-98807f6f3427)
 
- 
-```
-alter table employee
-add column department_id INTEGER;
-alter table employee
-add column manager_id INTEGER default NULL;
+```sql
+CREATE TABLE Products(
+ProductID PRIMARY KEY,
+ProductName NOT NULL,
+Price REAL CHECK(Price > 0),
+Stock INTEGER CHECK(Stock >= 0)
+);
 ```
 
 **Output:**
-![image](https://github.com/user-attachments/assets/1cecb8c5-5b55-4fde-8910-0ee1191bd1c3)
-
+![A5](https://github.com/user-attachments/assets/8dc31525-b4ab-46a2-9f76-ed471031a158)
 
 **Question 6**
-Insert all students from Archived_students table into the Student_details table.
+![Q6](https://github.com/user-attachments/assets/cf0e68b8-14aa-4acd-b001-07721ec8e9d3)
 
-cid         name        type        notnull     dflt_value  pk
-----------  ----------  ----------  ----------  ----------  ----------
-0           RollNo      INT           0                       1
-1           Name        VARCHAR(100)  0                       0
-2           Gender      VARCHAR(10)   0                       0
-3           Subject     VARCHAR(50)   0                       0
-4           MARKS       INT           0                       0
-```
-insert into Student_details
-select * from Archived_students;
-```
-
-**Output:**
-
-![image](https://github.com/user-attachments/assets/c9974ca8-ec1f-4dc2-b07d-433cb5a692a9)
-
-**Question 7**
-Create a table named Members with the following columns:
-
-MemberID as INTEGER
-MemberName as TEXT
-JoinDate as DATE
-
-```
-create table Members(MemberID INTEGER,
-MemberName TEXT,
-JoinDate DATE
-);
-```
-
-**Output:**
-
-![image](https://github.com/user-attachments/assets/ef43c0c0-825b-42ee-9d80-c5f07fc23699)
-
-**Question 8**
-Create a new table named item with the following specifications and constraints:
-item_id as TEXT and as primary key.
-item_desc as TEXT.
-rate as INTEGER.
-icom_id as TEXT with a length of 4.
-icom_id is a foreign key referencing com_id in the company table.
-The foreign key should set NULL on updates and deletes.
-item_desc and rate should not accept NULL.
-
-```
-create table item(item_id TEXT primary key,
+```sql
+CREATE TABLE item(
+item_id TEXT PRIMARY KEY,
 item_desc TEXT NOT NULL,
 rate INTEGER NOT NULL,
-icom_id TEXT(4),
-foreign key (icom_id)references company(com_id) on update set NULL on delete set NULL
+icom_id TEXT CHECK(Length(icom_id)=4),
+FOREIGN KEY (icom_id) REFERENCES company(com_id)
+ON UPDATE SET NULL
+ON DELETE SET NULL
 );
 ```
 
 **Output:**
+![A6](https://github.com/user-attachments/assets/ffe49c70-7513-4e9e-94cb-1f66f0279f94)
 
-![image](https://github.com/user-attachments/assets/51a84dbb-62b1-49ed-99ef-9b254ce3be04)
+**Question 7**
+![Q7](https://github.com/user-attachments/assets/af087f93-4625-48bf-8a4d-1ecea52c9357)
+
+
+```sql
+CREATE TABLE contacts(
+contact_id INTEGER PRIMARY KEY,
+first_name TEXT NOT NULL,
+last_name TEXT NOT NULL,
+email TEXT,
+phone TEXT NOT NULL CHECK(Length(phone) >= 10)
+);
+```
+
+**Output:**
+![A7](https://github.com/user-attachments/assets/ccffa308-254e-49f2-8d40-e3211fcf008d)
+
+**Question 8**
+![Q8](https://github.com/user-attachments/assets/2179cbf1-00ab-42c1-964c-719f2d05f9a3)
+
+```sql
+ALTER TABLE Student_details
+ADD mobilenumber number;
+```
+
+**Output:**
+![A8](https://github.com/user-attachments/assets/30abeb4d-d97d-4eae-a1c4-723d644052c4)
 
 **Question 9**
-Create a table named ProjectAssignments with the following constraints:
-AssignmentID as INTEGER should be the primary key.
-EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
-ProjectID as INTEGER should be a foreign key referencing Projects(ProjectID).
-AssignmentDate as DATE should be NOT NULL.
+![Q9](https://github.com/user-attachments/assets/1ea61151-7cce-458c-b56a-30a8a7eda491)
 
-```
-create table ProjectAssignments(AssignmentID INTEGER primary key,
-EmployeeID INTEGER,
-ProjectID INTEGER,
-AssignmentDate DATE NOT NULL,
-foreign key (EmployeeID)references Employees(EmployeeID),
-foreign key (ProjectID)references Projects(ProjectID)
-);
+```sql
+CREATE TABLE Tasks(
+TaskID INTEGER,
+TaskName TEXT,
+DueDate DATE);
 ```
 
 **Output:**
-![image](https://github.com/user-attachments/assets/bdb0a3ac-260d-4f64-b9a1-74ad508a7a03)
+![A9](https://github.com/user-attachments/assets/3562eb28-f660-450c-8d3d-ae824bc4b4f8)
 
 **Question 10**
-Insert a student with RollNo 201, Name David Lee, Gender M, Subject Physics, and MARKS 92 into the Student_details table.
+![Q10](https://github.com/user-attachments/assets/3175834d-4228-40f3-8286-112b2c6253e0)
 
-
-
-```
-insert into Student_details(RollNo,Name,Gender,Subject,MARKS)values(201,"David Lee","M","Physics",92);
+```sql
+INSERT INTO Student_details (RollNo, Name, Gender, Subject, MARKS)
+VALUES (201, "David Lee", "M", "Physics", 92);
 ```
 
 **Output:**
-
-![image](https://github.com/user-attachments/assets/76eafbae-cb30-4f6b-85b9-ce12ff259aee)
-
-
+![A10](https://github.com/user-attachments/assets/0f9467f8-f6b6-4b35-971a-0407cf369ba5)
 
 ## RESULT
 Thus, the SQL queries to implement different types of constraints and DDL commands have been executed successfully.
